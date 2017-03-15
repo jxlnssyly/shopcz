@@ -1,0 +1,85 @@
+<body>
+    <h1>
+        <span class="action-span"><%= link_to '添加管理员',new_admin_path %></span>
+        <span class="action-span1"><a href="#">ECSHOP 管理中心</a></span>
+        <span id="search_id" class="action-span1"> - 管理员列表 </span>
+        <div style="clear:both"></div>
+    </h1>
+    <div class="form-div">
+
+
+
+
+
+        <form action="<%= admins_path %>" name="searchForm" method="get">
+        <%= link_to image_tag('icon_search.gif', alt: 'search') %>
+        用户名：<input type="text" name="un" size="15" value="" />
+        id：<input type="text" name="id" size="15" value="" />
+        <input type="submit" value=" 搜索 " class="button" />
+        </form>
+    </div>
+
+
+
+            <%= form_tag bdel_path, method: :delete do %>
+                 <div class="list-div" id="listDiv">
+            <table cellpadding="3" cellspacing="1">
+                <tr>
+                    <th width="40"><input id="selall" type="checkbox" /></th>
+                    <th>id</th>
+                    <th>用户名</th>
+                    <th>操作</th>
+                </tr>
+                    <% @admins.each do |admin| %>
+                <tr>
+                    <td align="center">
+                    <% if admin.id != 1 %>
+                         <%= check_box_tag "user_ids[]",  admin.id, false,class: "selall" %>
+                    <% end %>
+                    </td>
+                    <td align="center"><%= admin.id %></td>
+                    <td align="center"><%= admin.username %></td>
+                    <td align="center">
+                    <%= link_to '编辑', edit_admin_path(admin) %>
+                    <% if admin.id != 1 %>
+                     |
+                     <%= link_to '删除',admin,:method => 'delete',
+                                         data: { confirm: 'Are you sure?' } %>
+                    <% end %>
+                    </td>
+                </tr>
+                <% end %>
+                <tr>
+                    <td>
+                             <%= submit_tag "删除选中" %>
+                    </td>
+                    <td align="right" nowrap="true" colspan="3">
+                        <div id="turn-page">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <% end -%>
+
+
+    <%= will_paginate%>
+
+    <div id="footer">
+    共执行 3 个查询，用时 0.021251 秒，Gzip 已禁用，内存占用 2.194 MB<br />
+    版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+
+</body>
+    <script>
+
+    $(document).ready(function() {
+            $("#selall").click(function(){
+                if($(this).is(":checked"))
+                    $(".selall").prop("checked",true);   // 设置所有的都选中
+                else
+                    $(".selall").prop("checked",false);;       // 设置都不选中
+        });
+    });
+
+
+    </script>

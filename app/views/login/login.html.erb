@@ -1,0 +1,47 @@
+<body style="background: #278296;color:white">
+<%= form_for @admin, url:{action: "sigin"} do |f| %>
+    <table cellspacing="0" cellpadding="0" style="margin-top:100px" align="center">
+        <tr>
+            <td>
+            <%= image_tag 'login', alt: 'ECSHOP' %>
+            </td>
+            <td style="padding-left: 50px">
+                <table>
+                    <tr>
+                        <td>
+                        <%= f.label :username, '用户名' %></td>
+                        <td>
+                        <%= f.text_field :username %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                         <%= f.label :password, '密码' %>
+                         </td>
+                        <td>
+                            <%= f.password_field :password %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>验证码：</td>
+                        <td>
+                            <%= rucaptcha_input_tag(class: 'form-control', placeholder: 'Input Captcha') %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <%= rucaptcha_image_tag(alt: '验证码,点击刷新',size: '148x45') %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <%= f.submit "进入管理中心", class: "btn btn-large btn-primary" %>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+<% end -%>
+</body>
