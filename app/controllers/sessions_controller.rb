@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
   	# render plain: (verify_rucaptcha?(params[:_rucaptcha])).inspect
   	if user && user.authenticate(params[:session][:password]) && verify_rucaptcha?(params[:rucaptcha_input])
   		sign_in user
-  		redirect_to admins_path
+  		redirect_to root_path
   	else
-  		flash[:error] = 'Invalid email/password combination' # Not quite right! 
+  		flash[:error] = 'Invalid email/password combination' # Not quite right!
   		render 'new'
   	end
   end

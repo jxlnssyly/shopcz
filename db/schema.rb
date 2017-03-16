@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316022116) do
+ActiveRecord::Schema.define(version: 20170316130352) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20170316022116) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.index ["remember_token"], name: "index_admins_on_remember_token"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "cat_name"
+    t.integer  "parent_id",  default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end

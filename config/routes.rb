@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :admins
   resources :sessions, only: [:new, :create, :destroy]
+  resources :categories
+
+
+
   match 'match/destory', to: 'admins#destroy', via: 'delete'
   match '/bdel', to: 'admins#destroy_multiple',   via: 'delete'
   match '/signin', to: 'sessions#new', via: 'get'
