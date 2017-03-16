@@ -1,5 +1,5 @@
 <body style="background: #278296;color:white">
-<%= form_for @admin, url:{action: "sigin"} do |f| %>
+<%= form_for(:session, url: sessions_path)do |f| %>
     <table cellspacing="0" cellpadding="0" style="margin-top:100px" align="center">
         <tr>
             <td>
@@ -25,7 +25,7 @@
                     <tr>
                         <td>验证码：</td>
                         <td>
-                            <%= rucaptcha_input_tag(class: 'form-control', placeholder: 'Input Captcha') %>
+                            <%= rucaptcha_input_tag( placeholder: '请输入验证码') %>
                         </td>
                     </tr>
                     <tr>

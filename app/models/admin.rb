@@ -1,24 +1,26 @@
 class Admin < ApplicationRecord
 
+    has_secure_password
+
     validates :username, presence: true, uniqueness: true
 
     validates :password, presence: true
 
-    before_save { self.password = Digest::MD5::hexdigest(self.password) }
+    before_save { self.username = username.downcase }
+    before_create :create_remember_token
 
-    def login
-        @password = self.password
-        @info = Admin.find_by(username: self.username.to_s)
-        if @info
-            if @info.password == Digest::MD5::hexdigest(self.password)
-
-                return true
-            else
-                return 2;
-            end
-        else
-            return 1;
-        end
+    def Admin.new_remember_token
+        SecureRandom.urlsafe_base64
     end
+
+    def Admin.encrypt(token)
+        Digest::SHA1.hexdigest(token.to_s)
+    end
+
+    private
+
+        def create_remember_token
+            self.remember_token = Admin.encrypt(Admin.new_remember_token)
+        end
 
 end

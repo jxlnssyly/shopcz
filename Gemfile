@@ -33,6 +33,7 @@ gem 'rucaptcha'
 gem 'dalli'
 gem 'imagemagick-binaries'
 gem 'paperclip-ghostscript'
+gem 'bcrypt-ruby', '3.1.2'
 
 
 

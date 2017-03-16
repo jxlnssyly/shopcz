@@ -5,12 +5,10 @@ Rails.application.routes.draw do
   get 'index/top'
 
   resources :admins
-
+  resources :sessions, only: [:new, :create, :destroy]
   match 'match/destory', to: 'admins#destroy', via: 'delete'
   match '/bdel', to: 'admins#destroy_multiple',   via: 'delete'
-  match '/login', to: 'login#login',   via: 'get'
-  match '/sigin', to: 'login#sigin',   via: 'post'
-  match '/signout', to: 'login#logout', via: 'get'
-
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
 
 end
