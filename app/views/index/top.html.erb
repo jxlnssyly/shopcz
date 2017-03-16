@@ -119,7 +119,7 @@
         </ul>
         <div id="send_info">
             <a href="#" target="main-frame" class="fix-submenu">清除缓存</a>
-            <!-- <%=  %> -->
+            <%= link_to '登出',signout_path, method: :delete, :target => "_parent" %> 
         </div>
     </div>
 </div>

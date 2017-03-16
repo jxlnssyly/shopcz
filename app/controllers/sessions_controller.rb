@@ -13,11 +13,11 @@ class SessionsController < ApplicationController
   		flash[:error] = 'Invalid email/password combination' # Not quite right! 
   		render 'new'
   	end
-
   end
 
 
   def destroy
+    # render plain: "test".inspect
   	sign_out
   	redirect_to admins_path
   end
