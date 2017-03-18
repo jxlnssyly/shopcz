@@ -1,0 +1,45 @@
+
+<body>
+<h1>
+    <span class="action-span"><a href="__CONTROLLER__/lst">列表</a></span>
+    <span class="action-span1"><a href="#">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 修改 </span>
+    <div style="clear:both"></div>
+</h1>
+<div class="main-div">
+<!-- __SELF__:当前方法 -->
+    <form method="POST" action="__SELF__">
+        <table cellspacing="1" cellpadding="3" width="100%">
+            <tr>
+                <td class="label">上级分类：</td>
+                <td>
+                <%= select("","parent_id",cat_tree.map {|u|
+                    if @category.id == u.id
+                     next
+                 else
+                    [('-' * 8 * u.level) +  u.cat_name,u.id ]
+                 end
+                        },{:selected => @category.parent_id}) %>
+                </td>
+            </tr>
+            <input type="hidden" name="id" value="<?php echo $data['id']; ?>" />            <tr>
+                <td class="label">分类名称：</td>
+                <td>
+                    <input type="text" name="cat_name" maxlength="60" value="<%= @category.cat_name %>" />
+                                                            <span class="require-field">*</span>
+                                    </td>
+            </tr>
+                        <tr>
+                <td colspan="2" align="center"><br />
+                    <input type="submit" class="button" value=" 确定 " />
+                    <input type="reset" class="button" value=" 重置 " />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div id="footer">
+共执行 1 个查询，用时 0.018952 秒，Gzip 已禁用，内存占用 2.197 MB<br />
+版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+</body>

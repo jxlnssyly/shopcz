@@ -1,6 +1,6 @@
 <body>
 <h1>
-    <span class="action-span"><a href="__CONTROLLER__/lst">列表</a></span>
+    <span class="action-span"><a href="<%= categories_path %>">列表</a></span>
     <span class="action-span1"><a href="#">ECSHOP 管理中心</a></span>
     <span id="search_id" class="action-span1"> - 添加 </span>
     <div style="clear:both"></div>
@@ -13,9 +13,7 @@
              <tr>
                 <td class="label">上级分类：</td>
                 <td>
-                    <%= select("parent_id","cat_name",all_categories.map {|u| [u.cat_name ]}) %>
-
-
+                    <%= select("","parent_id",cat_tree.map {|u| [('-' * 8 * u.level) +  u.cat_name,u.id ]}) %>
                 </td>
             </tr>
             <tr>
