@@ -1,0 +1,25 @@
+<%= render 'shared/error_messages' ,object: f.object %>
+
+<table cellspacing="1" cellpadding="3" width="100%">
+<tr>
+    <td><%= f.label :parent_id,"上级权限：" %></td>
+    <td><%= select("privilege","parent_id",pri_tree.map {|u| [('-' * 8 * u.level) +  u.pri_name,u.id ]}) %></td>
+</tr>
+<tr>
+    <td><%= f.label :pri_name, "权限名称：" %></td>
+    <td><%= f.text_field :pri_name %></td>
+</tr>
+
+<tr>
+    <td><%= f.label :controller_name, "控制器名称：" %></td>
+    <td><%= f.text_field :controller_name %></td>
+</tr>
+<tr>
+    <td><%= f.label :action_name, "方法名称：" %></td>
+    <td><%= f.text_field :action_name %></td>
+</tr>
+</table>
+
+
+
+

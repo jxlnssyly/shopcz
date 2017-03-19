@@ -11,6 +11,7 @@ class AdminsController < ApplicationController
         end
     end
 
+
     def new
         @admin = Admin.new()
     end

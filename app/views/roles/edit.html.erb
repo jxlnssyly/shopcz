@@ -1,0 +1,82 @@
+
+<body>
+<h1>
+    <span class="action-span"><a href="__CONTROLLER__/lst">列表</a></span>
+    <span class="action-span1"><a href="#">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 添加 </span>
+    <div style="clear:both"></div>
+</h1>
+<div class="main-div">
+
+		<%= form_for(@role) do |f| %>
+			<table cellspacing="1" cellpadding="3" width="100%">
+			<tr>
+			    <td><%= f.label :role_name,"角色名称：" %></td>
+			    <td><%= f.text_field :role_name %></td>
+			</tr>
+			<tr>
+			    <td><%= f.label :pri_name, "权限列表：" %></td>
+			    <td>
+			    <ul>
+					<% pri_tree.each do |pri| %>
+						  <li level="<%= pri.level %>"><%= check_box_tag 'pri_id_list[]', pri.id, if @role.pri_id_list.include?pri.id.to_s
+							checkStr = 'true';
+						end
+						%>
+						  <%= label_tag '-' * 8 * pri.level+pri.pri_name %></li>
+					<% end %>
+					</ul>
+				  </td>
+			</tr>
+			</table>
+
+       <br>
+       <%= f.submit "提交", class: "btn btn-large btn-primary" %>
+  	<% end %>
+</div>
+
+<div id="footer">
+共执行 1 个查询，用时 0.018952 秒，Gzip 已禁用，内存占用 2.197 MB<br />
+版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+</body>
+<script>
+
+$(function() {
+	// 为所有checkbox绑定点击事件
+$(":checkbox").click(function(){
+	// $(this):点击的那个checkbox
+	// 获取这个checkbox所在的li
+	var cur_li = $(this).parent();
+	// 当前是否是选 中
+	var checked = $(this).prop("checked");
+	// 获取当前li上的level属性
+	var cur_level = cur_li.attr("level");
+	// 选择所有前面的li,并且循环每一个li
+	cur_li.prevAll("li").each(function(){
+		// $(this):代表循环的每一个li
+		// 如果是上级并且当前是选中的
+		if($(this).attr("level") < cur_level && checked)
+		{
+			// 让li中的checkbox选中状态
+			$(this).find(":checkbox").prop("checked",true);
+			if($(this).prop("level") == '0')
+				return false;
+		}
+	});
+	// 非选中状态，那么就设置所有子权限也取消
+	if(!checked)
+	{
+		// 选 中所有后面的li
+		cur_li.nextAll("li").each(function(){
+			// 如果是子权限就取消选中状态，否则退出循环
+			if($(this).attr("level") > cur_level)
+				$(this).find(":checkbox").prop("checked",false);
+			else
+				return false;
+		});
+	}
+});
+
+})
+
+</script>

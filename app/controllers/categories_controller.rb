@@ -19,8 +19,11 @@ class CategoriesController < ApplicationController
         @category = Category.find(params[:id])
     end
     def destroy
-        @category = Category.find(params[:id])
-        @category.destroy
+        # render plain: params.inspect
+        @categories = Category.find(params[:delid])
+        @categories.each do |c|
+            c.destroy
+        end
         redirect_to categories_path
     end
 

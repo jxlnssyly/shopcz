@@ -1,0 +1,66 @@
+<body>
+<h1>
+    <span class="action-span"><a href="<%= new_privilege_path %>">添加</a></span>
+    <span class="action-span1"><a href="#">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 列表 </span>
+    <div style="clear:both"></div>
+</h1>
+            <%= form_tag action: 'destroy_multiple', method: :delete do %>
+                 <div class="list-div" id="listDiv">
+            <table cellpadding="3" cellspacing="1">
+                <tr>
+                    <th width="40"><input id="selall" type="checkbox" /></th>
+                        <th>id</th>
+                        <th>权限名称</th>
+                        <th>控制器名称</th>
+                        <th>方法名称</th>
+                        <th>操作</th>
+                </tr>
+                    <% @privileges.each do |p| %>
+                <tr>
+                    <td align="center">
+                    <% if p.id != 1 %>
+                         <%= check_box_tag "delid[]",  p.id, false,class: "selall" %>
+                    <% end %>
+                    </td>
+                    <td align="center"><%= p.id %></td>
+                    <td align="left"><%= ('-' * 8 * p.level ) +  p.pri_name %></td>
+                    <td align="center"><%= p.controller_name %></td>
+                    <td align="center"><%= p.action_name %></td>
+                    <td align="center">
+                    <%= link_to '编辑', edit_admin_path(p) %>
+                     |
+                     <%= link_to '删除',p,:method => 'delete',
+                                         data: { confirm: 'Are you sure?' } %>
+                    </td>
+                </tr>
+                <% end %>
+                <tr>
+                    <td>
+                             <%= submit_tag "删除选中" %>
+                    </td>
+                    <td align="right" nowrap="true" colspan="3">
+                        <div id="turn-page">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <% end -%>
+
+
+
+
+<div id="footer">
+共执行 3 个查询，用时 0.021251 秒，Gzip 已禁用，内存占用 2.194 MB<br />
+版权所有 &copy; 2005-2012 上海商派网络科技有限公司，并保留所有权利。</div>
+</body>
+</html>
+<script>
+$("#selall").click(function(){
+    if($(this).attr("checked"))
+        $(".selall").attr("checked","checked");   // 设置所有的都选中
+    else
+        $(".selall").removeAttr("checked");       // 设置都不选中
+});
+</script>

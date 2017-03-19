@@ -7,10 +7,6 @@
     </h1>
     <div class="form-div">
 
-
-
-
-
         <form action="<%= admins_path %>" name="searchForm" method="get">
         <%= link_to image_tag('icon_search.gif', alt: 'search') %>
         用户名：<input type="text" name="un" size="15" value="" />
@@ -18,8 +14,6 @@
         <input type="submit" value=" 搜索 " class="button" />
         </form>
     </div>
-
-
 
             <%= form_tag bdel_path, method: :delete do %>
                  <div class="list-div" id="listDiv">
